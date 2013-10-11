@@ -4,25 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using UrlsAndRoutes.In
 
 namespace UrlsAndRoutes {
     public class RouteConfig {
         public static void RegisterRoutes(RouteCollection routes) {
 
-            routes.MapRoute("ShopSchema2", "Shop/OldAction",
-                new { controller = "Home", action = "Index" });
+           routes.MapRoute("AddContollerRoute", "Home/{action}/{id}/{*catchall}",
+                new { controller = "Home", action = "Index",
+                    id = UrlParameter.Optional },
+                new[] { "URLsAndRoutes.AdditionalControllers" });
 
-            routes.MapRoute("ShopSchema", "Shop/{action}",
-                new { controller = "Home" });
+            routes.MapRoute("MyRoute", "{controller}/{action}/{id}/{*catchall}",
+                new { controller = "Home", action = "Index",
+                    id = UrlParameter.Optional },
+                new[] { "URLsAndRoutes.Controllers" });
 
-            routes.MapRoute("", "X{controller}/{action}");
 
-            routes.MapRoute("MyRoute", "{controller}/{action}",
-                new { controller = "Home", action = "Index" });
-
-            routes.MapRoute("", "REI/{controller}/{action}",
-                new { controller = "Home", action = "Index" });
-
+            // Original
             //routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             //routes.MapRoute(
